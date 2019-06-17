@@ -5,10 +5,5 @@ package com.gentle.resources;
  * @date 2019/06/16 : 16:50
  */
 public interface Loader {
-    /**
-     *
-     * @param filePath
-     */
-    void load(String filePath);
 
 }

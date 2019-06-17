@@ -7,7 +7,7 @@ package com.gentle.resources;
 public class PropertiesLoader implements Loader {
 
 
-    @Override
+
     public void load(String filePath) {
 
     }

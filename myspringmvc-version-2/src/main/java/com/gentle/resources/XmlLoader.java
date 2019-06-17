@@ -1,5 +1,11 @@
 package com.gentle.resources;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.io.SAXReader;
+
+import java.io.File;
+
 /**
  * @author Gentle
  * @date 2019/06/16 : 19:38
@@ -8,7 +14,7 @@ public class XmlLoader implements Loader {
 
     private static final String SUFFIX ="xml";
 
-    @Override
+
     public void load(String filePath) {
 
         if (filePath==null|| "".equals(filePath)){
@@ -21,14 +27,27 @@ public class XmlLoader implements Loader {
 
     }
 
-    public void parseXml(){
+    public void parseXml(String filePath){
 
+        SAXReader reader = new SAXReader();
+        try {
+            Document document = reader.read(new File(filePath));
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
 
+        
 
 
 
     }
 
+    public void doParseXml(){
+
+
+
+
+    }
 
 
 
