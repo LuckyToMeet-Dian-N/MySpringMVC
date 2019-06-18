@@ -1,6 +1,5 @@
 package com.gentle.parameter;
 
-import com.gentle.test.Users;
 import com.gentle.util.ClassUtils;
 import org.objectweb.asm.*;
 
@@ -103,14 +102,5 @@ public class LocalMethodParameterNameDiscoverer implements ParameterNameDiscover
 
     }
 
-    public static void main(String[] args) throws NoSuchMethodException {
-
-        LocalMethodParameterNameDiscoverer localMethodParameterNameDiscoverer = new LocalMethodParameterNameDiscoverer();
-        Class<Users> usersClass = Users.class;
-        String[] setNames = localMethodParameterNameDiscoverer.getParameterNames(usersClass.getMethod("setName", String.class, String.class));
-        String[] setNames2 = localMethodParameterNameDiscoverer.getParameterNames(usersClass.getMethod("setName2", String.class, String.class));
-        System.out.println(methodParameterNameCache);
-
-    }
 
 }

@@ -22,16 +22,12 @@ public class DefaultApplicationContext extends AbstractConfigApplicationContext 
     public void loader(String location) {
         DefaultXmlBeanReader reader = new DefaultXmlBeanReader();
         reader.loader(location);
-        List<BeanInfomation> beanInfomations = reader.getBeanInfomations();
-        beanInfomations.forEach(this::registerBean);
+        refresh(reader.getBeanInfomations());
     }
 
     @Override
     public void loader(InputStream inputStream) {
-        DefaultXmlBeanReader reader = new DefaultXmlBeanReader();
-        reader.loader(inputStream);
-        List<BeanInfomation> beanInfomations = reader.getBeanInfomations();
-        beanInfomations.forEach(this::registerBean);
+        //TODO
     }
 
     public static void main(String[] args) {

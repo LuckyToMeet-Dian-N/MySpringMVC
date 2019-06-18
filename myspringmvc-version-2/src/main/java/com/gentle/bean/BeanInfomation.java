@@ -1,6 +1,5 @@
 package com.gentle.bean;
 
-import com.gentle.util.TypeChoose;
 
 /**
  * @author Gentle
