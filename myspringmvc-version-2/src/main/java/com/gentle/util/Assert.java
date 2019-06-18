@@ -1,11 +1,13 @@
 package com.gentle.util;
 
+import java.util.function.Supplier;
+
 /**
  * @author Gentle
  * @date 2019/06/18 : 12:51
  */
 public abstract class Assert {
-    public  static  final String OBJECT_IS_NULL = " ]对象为空!";
+    private   static  final String OBJECT_IS_NULL = " ]对象为空!";
 
     private static final String PRIFIX = "[ ";
 
@@ -26,6 +28,24 @@ public abstract class Assert {
      */
     public static void notNull( Object object) {
        notNull(object,PRIFIX+ object+OBJECT_IS_NULL);
+    }
+
+    /**
+     *
+     * @param expression  期望值
+     */
+    public static void isTrue(boolean expression, String message) {
+        if (!expression) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     *
+     * @param expression 期望值
+     */
+    public static void isTrue(boolean expression) {
+        isTrue(expression, "[ "+expression+" ] 应该为 true");
     }
 
 

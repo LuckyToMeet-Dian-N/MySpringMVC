@@ -1,11 +1,9 @@
 package com.gentle.context;
 
 import com.gentle.bean.BeanInfomation;
-import com.gentle.beanfactory.BeanFactory;
 import com.gentle.beanfactory.DefaultBeanFactory;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,5 +33,17 @@ public class DefaultApplicationContext extends AbstractConfigApplicationContext 
         List<BeanInfomation> beanInfomations = reader.getBeanInfomations();
         beanInfomations.forEach(this::registerBean);
     }
+
+    public static void main(String[] args) {
+        DefaultApplicationContext defaultApplicationContext = new DefaultApplicationContext();
+        BeanInfomation beanInfomation = new BeanInfomation();
+        beanInfomation.setClazz("com.gentle.util.ClassUtils");
+        beanInfomation.setId("12313");
+        defaultApplicationContext.registerBean(beanInfomation);
+        DefaultBeanFactory beanFactory = defaultApplicationContext.getBeanFactory();
+        System.out.println(beanFactory);
+
+    }
+
 
 }

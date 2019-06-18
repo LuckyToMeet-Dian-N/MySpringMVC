@@ -1,6 +1,7 @@
 package com.gentle.web;
 
 import com.gentle.beanfactory.BeanFactory;
+import com.gentle.beanfactory.DefaultBeanFactory;
 import com.gentle.context.DefaultApplicationContext;
 
 import javax.servlet.ServletConfig;
@@ -21,7 +22,7 @@ public  class DispatcherServlet  extends HttpServlet {
     private Map<String,Object> urlMapping = new ConcurrentHashMap<>();
 
 
-    private BeanFactory beanFactory;
+    private DefaultBeanFactory beanFactory;
 
 
     @Override
@@ -31,6 +32,7 @@ public  class DispatcherServlet  extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         super.doPost(req, resp);
     }
 
@@ -47,7 +49,7 @@ public  class DispatcherServlet  extends HttpServlet {
 
     }
 
-    
+
 
 
 

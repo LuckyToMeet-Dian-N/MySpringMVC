@@ -49,14 +49,11 @@ public class ClassUtils {
      * @param clazzName 包名+类名
      * @return
      */
-    public static Class<?> getClassByClassName(String clazzName){
+    public static Class<?> getClassByClassName(String clazzName) throws ClassNotFoundException {
         Assert.notNull(clazzName);
-        try {
+
             return Class.forName(clazzName);
-        } catch (ClassNotFoundException e) {
-           e.printStackTrace();
-        }
-        return null;
+
     }
 
     /**

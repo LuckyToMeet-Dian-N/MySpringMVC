@@ -14,7 +14,27 @@ public class BeanInfomation {
 
     private Boolean singlon;
 
-    private TypeChoose type;
+    private String type = "bean";
+
+    private String methodName;
+
+    private String url;
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getId() {
         return id;
@@ -40,11 +60,11 @@ public class BeanInfomation {
         this.singlon = singlon;
     }
 
-    public TypeChoose getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(TypeChoose type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

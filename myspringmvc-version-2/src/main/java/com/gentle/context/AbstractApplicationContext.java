@@ -21,7 +21,10 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
 
     private Map<Class<?>, Object> beanName = new ConcurrentHashMap<>();
 
-
+    /**
+     *  注册bean到ioc中
+     * @param beanInfomation bean  信息
+     */
     public abstract void registerBean(BeanInfomation beanInfomation);
 
     @Override
@@ -41,12 +44,15 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
     }
 
     @Override
+    public <T> T getMapping(String url) {
+        return getBeanFactory().getMapping(url);
+    }
+
+    @Override
     public void refresh() {
 
         try {
             BeanFactory beanFactory = getBeanFactory();
-
-
 
         } catch (Exception e) {
 

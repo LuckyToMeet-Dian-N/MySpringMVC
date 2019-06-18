@@ -23,9 +23,20 @@ public interface BeanFactory {
     <T> T getBean(Class<?> clazz);
 
     /**
+     * 根据 url 获取 Method 对象
+     * @param <T> Method
+     * @return
+     */
+    <T> T getMapping(String url);
+
+    /**
+     * 是否为单例
      *
      * @param name
      * @return
      */
     boolean isSingleton(String name);
+
+
+
 }

@@ -11,6 +11,8 @@ public class TypeChoose {
 
         String PROPERTIES = "properties";
 
+        String CONTROLLER ="controller";
+
     }
 
 
