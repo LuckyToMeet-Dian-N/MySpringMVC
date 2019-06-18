@@ -6,9 +6,26 @@ package com.gentle.beanfactory;
  */
 public interface BeanFactory {
 
+    /**
+     *
+     * @param name
+     * @param <T>
+     * @return
+     */
+    <T> T getBean(String name);
 
+    /**
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    <T> T getBean(Class<?> clazz);
 
-
-
-
+    /**
+     *
+     * @param name
+     * @return
+     */
+    boolean isSingleton(String name);
 }

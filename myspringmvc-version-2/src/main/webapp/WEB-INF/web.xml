@@ -7,7 +7,7 @@
 
   <servlet>
     <servlet-name>MySpringMVC</servlet-name>
-    <servlet-class>com.gentle.load.MyDispatcherServlet</servlet-class>
+    <servlet-class>com.gentle.web.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:application.properties</param-value>

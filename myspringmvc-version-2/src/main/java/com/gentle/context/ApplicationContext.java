@@ -10,7 +10,4 @@ import com.gentle.resources.Loader;
 public  interface ApplicationContext extends Loader, BeanFactory {
 
 
-
-
-
 }

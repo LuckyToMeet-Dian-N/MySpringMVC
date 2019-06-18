@@ -39,13 +39,25 @@ public class ClassUtils {
      * @param typeName 类型的名字
      * @return 是否支持
      */
-    public static boolean isSupportDataTypeByTypeNmae(String typeName){
-        if (typeName==null){
-            throw new NullPointerException("class  对象不应该为空");
-        }
+    public static boolean isSupportDataTypeByTypeName(String typeName){
+        Assert.notNull(typeName);
         return parameterfTypeNameMap.containsKey(typeName);
     }
 
+    /**
+     *  类对象
+     * @param clazzName 包名+类名
+     * @return
+     */
+    public static Class<?> getClassByClassName(String clazzName){
+        Assert.notNull(clazzName);
+        try {
+            return Class.forName(clazzName);
+        } catch (ClassNotFoundException e) {
+           e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * 判断是否为支持的类型
@@ -53,9 +65,7 @@ public class ClassUtils {
      * @return 是否支持
      */
     public static boolean isSupportDataType(Class<?> clazz){
-        if (clazz==null){
-            throw new NullPointerException("class  对象不应该为空");
-        }
+        Assert.notNull(clazz);
         return supportParametersMap.containsKey(clazz);
     }
 
@@ -73,7 +83,7 @@ public class ClassUtils {
         System.out.println(isSupportDataType(Integer.class));
 
         System.out.println(getClassFileName(Integer.class));
-        System.out.println(isSupportDataTypeByTypeNmae(Integer.class.getName()));
+        System.out.println(isSupportDataTypeByTypeName(Integer.class.getName()));
     }
 
 

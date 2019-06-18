@@ -5,4 +5,13 @@ package com.gentle.resources;
  * @date 2019/06/17 : 16:24
  */
 public interface Resources {
+
+
+    Boolean isFile(String filePath);
+
+
+
+
+
+
 }
