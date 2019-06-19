@@ -13,6 +13,8 @@ public class TypeChoose {
 
         String CONTROLLER ="controller";
 
+        String PACKAGE = "package";
+
     }
 
 

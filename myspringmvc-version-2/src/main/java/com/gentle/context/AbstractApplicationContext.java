@@ -4,10 +4,13 @@ package com.gentle.context;
 import com.gentle.bean.BeanInfomation;
 import com.gentle.beanfactory.BeanFactory;
 import com.gentle.beanfactory.DefaultBeanFactory;
+import com.gentle.support.AnnotationLoad;
 import com.gentle.util.Assert;
+import com.gentle.util.TypeChoose;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -48,15 +51,17 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
         return getBeanFactory().getMapping(url);
     }
 
+    /**
+     * 核心载入类
+     * @param beanInfomations bean 信息
+     */
     @Override
     public void refresh(List<BeanInfomation> beanInfomations) {
         try {
 
-
             initIoc(beanInfomations);
 
-
-
+            initAnnotation(beanInfomations);
 
         } catch (Exception e) {
 
@@ -67,41 +72,23 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
         beanInfomations.forEach(e-> getBeanFactory().registerBean(e));
     }
 
-    private void intiScanPackage() {
 
-//        URL filePath = this.getClass().getClassLoader().getResource("/"+packageScan.toString().replaceAll(".", "/"));
-//
-//        //扫描包下所有的文件
-//        packageScan(packageScan.toString(), filePath.getPath()+packageScan.toString().replace(".","/"));
-
-    }
     /**
-     * 扫描所有包，将文件名加入集合中
-     *
-     * @param packagePath 包路径（properties读取的） 例如：com.gentle
-     * @param filePath    文件路径  转换后的路径 com/gentle
+     * 注解驱动
+     * @param beanInfomations bean 信息
      */
-    private void packageScan(String packagePath, String filePath) {
-        File file = new File(filePath.trim());
-        File[] files = file.listFiles();
-        if (files == null) {
-            System.out.println("没有文件");
-            return;
-        }
-        //递归扫描文件
-        Arrays.stream(files).forEach(e -> {
-            if (e.isDirectory()) {
-                packageScan(packagePath + "." + e.getName(), filePath + "/" + e.getName());
-            } else {
-//                classNames.add(packagePath + "." + e.getName().substring(0, e.getName().lastIndexOf(".")));
+    private void initAnnotation(List<BeanInfomation> beanInfomations) {
+
+        List<String> list = new ArrayList<>();
+        beanInfomations.forEach(e->{
+            if (e.getType().equals(TypeChoose.Type.PACKAGE)) {
+                list.add(e.getPackages());
             }
         });
-    }
-
-
-    private void initAnnotation(DefaultBeanFactory beanFactory) {
-
-
+        AnnotationLoad annotationLoad = new AnnotationLoad(list);
+        annotationLoad.setDefaultBeanFactory(getBeanFactory());
+        //开启载入注解
+        annotationLoad.annotationLoader();
     }
 
 

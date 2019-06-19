@@ -44,8 +44,7 @@ public  class DispatcherServlet  extends HttpServlet {
         DefaultApplicationContext applicationContext = new DefaultApplicationContext();
 
         applicationContext.loader(contextConfigLocation);
-        applicationContext.refresh();
-
+        
         this.beanFactory =applicationContext.getBeanFactory();
 
     }

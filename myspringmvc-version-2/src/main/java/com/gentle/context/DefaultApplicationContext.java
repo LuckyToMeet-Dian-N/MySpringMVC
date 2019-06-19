@@ -4,7 +4,6 @@ import com.gentle.bean.BeanInfomation;
 import com.gentle.beanfactory.DefaultBeanFactory;
 
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * @author Gentle

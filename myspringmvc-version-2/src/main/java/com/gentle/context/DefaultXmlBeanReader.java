@@ -19,9 +19,14 @@ import java.util.List;
  * @date 2019/06/17 : 11:18
  */
 public class DefaultXmlBeanReader implements Loader {
+    /**
+     * xml 文件后缀
+     */
     private static final String SUFFIX = "xml";
     private static final  String MATCH= "*";
-
+    /**
+     * 存放 bean 信息
+     */
     private List<BeanInfomation> beanInfomations = new ArrayList<>();
 
     /**

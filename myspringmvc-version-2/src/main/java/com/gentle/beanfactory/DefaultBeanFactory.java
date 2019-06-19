@@ -51,7 +51,6 @@ public class DefaultBeanFactory extends AbstractBeanFactory {
     @Override
     public void registerBean(BeanInfomation beanInfomation) {
         Assert.notNull(beanInfomation);
-
         doRegisterBean(beanInfomation);
     }
 

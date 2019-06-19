@@ -18,6 +18,18 @@ public class BeanInfomation {
     private String methodName;
 
     private String url;
+    /**
+     * 扫描包路径
+     */
+    private String packages;
+
+    public String getPackages() {
+        return packages;
+    }
+
+    public void setPackages(String packages) {
+        this.packages = packages;
+    }
 
     public String getMethodName() {
         return methodName;
