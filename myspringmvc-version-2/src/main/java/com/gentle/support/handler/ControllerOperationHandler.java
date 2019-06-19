@@ -1,5 +1,6 @@
 package com.gentle.support.handler;
 
+import com.gentle.annotation.Component;
 import com.gentle.bean.BeanInfomation;
 
 /**
@@ -9,6 +10,8 @@ import com.gentle.bean.BeanInfomation;
 public class ControllerOperationHandler implements AnnotationStrategy {
     @Override
     public BeanInfomation handlerBean(Class<?> clazz) {
+        BeanInfomation beanInfomation = new BeanInfomation();
+
         return null;
     }
 }

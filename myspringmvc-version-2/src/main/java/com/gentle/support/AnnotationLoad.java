@@ -1,5 +1,6 @@
 package com.gentle.support;
 
+import com.gentle.bean.BeanInfomation;
 import com.gentle.beanfactory.DefaultBeanFactory;
 import com.gentle.util.Assert;
 import com.gentle.util.ClassUtils;
@@ -28,30 +29,31 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
         Assert.notNull(packagePath);
         //扫描包下所有文件，并将文件名保存下来
         initScanClassFile();
+
+        doAnnotationLoader();
+
     }
 
-    private void  doAnnotationLoader(){
+    private void doAnnotationLoader() {
 
-        for (String clazz :classNames){
+        for (String clazz : classNames) {
             try {
                 Class<?> classByClassName = ClassUtils.getClassByClassName(clazz);
-
+                BeanInfomation beanInfomation = AnnotationContext.executeStrategy(classByClassName);
+                Assert.notNull(beanInfomation);
+                defaultBeanFactory.registerBean(beanInfomation);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
-
-
     }
 
-    private void initScanClassFile(){
-        packagePath.forEach(e->{
-            String filthPath= e.replaceAll(".","/");
-            packageScan(e,filthPath);
+    private void initScanClassFile() {
+        packagePath.forEach(e -> {
+            String filthPath = e.replaceAll(".", "/");
+            packageScan(e, filthPath);
         });
     }
-
-
 
 
     public List<String> getPackagePath() {

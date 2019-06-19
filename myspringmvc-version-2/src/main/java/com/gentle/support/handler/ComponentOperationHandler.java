@@ -12,16 +12,13 @@ public class ComponentOperationHandler implements AnnotationStrategy {
     @Override
     public BeanInfomation handlerBean(Class<?> clazz) {
         BeanInfomation beanInfomation = new BeanInfomation();
-        if (clazz.isAnnotationPresent(Component.class)){
-            Component annotation = clazz.getAnnotation(Component.class);
-            if ("".equals(annotation.value())){
-                beanInfomation.setId(clazz.getName());
-            }else {
-                beanInfomation.setId(annotation.value());
-            }
-            beanInfomation.setClazz(clazz.getName());
+        Component annotation = clazz.getAnnotation(Component.class);
+        if ("".equals(annotation.value())) {
+            beanInfomation.setId(clazz.getName());
+        } else {
+            beanInfomation.setId(annotation.value());
         }
-
+        beanInfomation.setClazz(clazz.getName());
         return beanInfomation;
     }
 }
