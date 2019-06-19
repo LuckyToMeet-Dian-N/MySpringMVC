@@ -1,4 +1,4 @@
-package com.gentle.support;
+package com.gentle.support.handler;
 
 import com.gentle.annotation.Component;
 import com.gentle.bean.BeanInfomation;
@@ -15,13 +15,11 @@ public class ComponentOperationHandler implements AnnotationStrategy {
         if (clazz.isAnnotationPresent(Component.class)){
             Component annotation = clazz.getAnnotation(Component.class);
             if ("".equals(annotation.value())){
-                beanInfomation.setClazz(clazz.getName());
+                beanInfomation.setId(clazz.getName());
             }else {
-                beanInfomation.setClazz(annotation.value());
+                beanInfomation.setId(annotation.value());
             }
-
-
-
+            beanInfomation.setClazz(clazz.getName());
         }
 
         return beanInfomation;

@@ -5,6 +5,7 @@ import com.gentle.annotation.Controller;
 import com.gentle.annotation.RestController;
 import com.gentle.annotation.Service;
 import com.gentle.bean.BeanInfomation;
+import com.gentle.support.handler.ComponentOperationHandler;
 
 /**
  * @author gentle
