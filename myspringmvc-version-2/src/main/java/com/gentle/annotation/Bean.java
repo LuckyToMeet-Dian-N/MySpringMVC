@@ -1,15 +1,15 @@
-package com.gentle.support.annotation;
+package com.gentle.annotation;
 
 import java.lang.annotation.*;
 
 /**
  * @author Gentle
- * @date 2019/06/16 : 16:39
+ * @date 2019/06/16 : 16:41
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Component {
+public @interface Bean {
     /**
      *  指定名字
      * @return
@@ -20,6 +20,4 @@ public @interface Component {
      * @return
      */
     String version() default "1.0";
-
-
 }

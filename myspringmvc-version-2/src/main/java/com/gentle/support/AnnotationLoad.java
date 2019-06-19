@@ -2,9 +2,8 @@ package com.gentle.support;
 
 import com.gentle.beanfactory.DefaultBeanFactory;
 import com.gentle.util.Assert;
+import com.gentle.util.ClassUtils;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,13 +28,19 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
         Assert.notNull(packagePath);
         //扫描包下所有文件，并将文件名保存下来
         initScanClassFile();
-
     }
 
     private void  doAnnotationLoader(){
 
+        for (String clazz :classNames){
+            try {
+                Class<?> classByClassName = ClassUtils.getClassByClassName(clazz);
 
-//        defaultBeanFactory.registerBean();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 

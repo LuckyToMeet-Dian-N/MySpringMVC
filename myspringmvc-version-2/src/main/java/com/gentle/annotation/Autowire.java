@@ -1,4 +1,4 @@
-package com.gentle.support.annotation;
+package com.gentle.annotation;
 
 import java.lang.annotation.*;
 
@@ -6,10 +6,10 @@ import java.lang.annotation.*;
  * @author Gentle
  * @date 2019/06/16 : 16:38
  */
-@Target(value = {ElementType.TYPE,ElementType.METHOD})
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface RequestMapping {
+public @interface Autowire {
     /**
      *  指定名字
      * @return
@@ -20,6 +20,4 @@ public @interface RequestMapping {
      * @return
      */
     String version() default "1.0";
-
-
 }

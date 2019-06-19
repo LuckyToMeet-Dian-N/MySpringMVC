@@ -1,6 +1,6 @@
 package com.gentle.support;
 
-import com.gentle.support.annotation.*;
+import com.gentle.annotation.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,7 +18,10 @@ public abstract   class AbstractAnnotationSupport implements AnnotationSupport {
      * 保存所有类文件名，用于注解扫描
      */
     protected  List<String> classNames = new ArrayList<>(32);
+
     static {
+
+
         annontationList.add(RestController.class);
         annontationList.add(Controller.class);
         annontationList.add(Bean.class);
