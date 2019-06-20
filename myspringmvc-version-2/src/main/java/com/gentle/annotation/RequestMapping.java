@@ -14,7 +14,7 @@ public @interface RequestMapping {
      *  指定名字
      * @return
      */
-    String value() default "";
+    String value();
     /**
      * 版本号
      * @return

@@ -48,5 +48,23 @@ public abstract class Assert {
         isTrue(expression, "[ "+expression+" ] 应该为 true");
     }
 
+    /**
+     *  判断对象是否为空
+     * @param object
+     * @param message
+     */
+    public static void isEnpty(Object object,String message){
+        if (object==null|| "".equals(object)){
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     *  判断对象是否为空
+     * @param object
+     */
+    public static void isEnpty(Object object){
+        isEnpty(object,"["+object+"] 不允许为空");
+    }
 
 }

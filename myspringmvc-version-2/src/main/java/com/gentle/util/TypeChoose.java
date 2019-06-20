@@ -11,7 +11,7 @@ public class TypeChoose {
 
         String PROPERTIES = "properties";
 
-        String CONTROLLER ="controller";
+        String MAPPING ="mapping";
 
         String PACKAGE = "package";
 

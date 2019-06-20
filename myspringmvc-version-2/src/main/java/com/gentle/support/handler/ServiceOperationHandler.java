@@ -1,6 +1,9 @@
 package com.gentle.support.handler;
 
+
+import com.gentle.annotation.Service;
 import com.gentle.bean.BeanInfomation;
+
 
 /**
  * @author Gentle
@@ -9,8 +12,14 @@ import com.gentle.bean.BeanInfomation;
 public class ServiceOperationHandler implements AnnotationStrategy {
     @Override
     public BeanInfomation handlerBean(Class<?> clazz) {
-
-
-        return null;
+        BeanInfomation beanInfomation = new BeanInfomation();
+        Service restController = clazz.getAnnotation(Service.class);
+        beanInfomation.setClazz(clazz.getName());
+        if ("".equals(restController.value())) {
+            beanInfomation.setId(clazz.getName());
+        } else {
+            beanInfomation.setId(restController.value());
+        }
+        return beanInfomation;
     }
 }

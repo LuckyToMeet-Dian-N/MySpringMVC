@@ -83,7 +83,7 @@ public class DefaultBeanFactory extends AbstractBeanFactory {
                 });
             }
             //判断是否为 controller 类型
-            if (type.equals(TypeChoose.Type.CONTROLLER)) {
+            if (type.equals(TypeChoose.Type.MAPPING)) {
                 //校验对象中字段是否为空
                 Assert.notNull(beanInfomation.getMethodName());
                 Assert.notNull(beanInfomation.getUrl());

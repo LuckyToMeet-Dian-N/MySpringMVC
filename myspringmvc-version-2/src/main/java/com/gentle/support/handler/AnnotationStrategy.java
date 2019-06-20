@@ -9,8 +9,8 @@ import com.gentle.bean.BeanInfomation;
  */
 public interface AnnotationStrategy {
     /**
-     *
-     * @param clazz
+     * 构建bean 信息
+     * @param clazz class 对象
      * @return
      */
     BeanInfomation handlerBean(Class<?> clazz);

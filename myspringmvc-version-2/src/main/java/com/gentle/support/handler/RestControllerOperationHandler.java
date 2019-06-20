@@ -22,6 +22,6 @@ public class RestControllerOperationHandler implements AnnotationStrategy {
         } else {
             beanInfomation.setId(restController.value());
         }
-        return null;
+        return beanInfomation;
     }
 }

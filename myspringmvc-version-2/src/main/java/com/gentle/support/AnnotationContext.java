@@ -1,14 +1,8 @@
 package com.gentle.support;
 
-import com.gentle.annotation.Component;
-import com.gentle.annotation.Controller;
-import com.gentle.annotation.RestController;
-import com.gentle.annotation.Service;
+import com.gentle.annotation.*;
 import com.gentle.bean.BeanInfomation;
-import com.gentle.support.handler.ComponentOperationHandler;
-import com.gentle.support.handler.ControllerOperationHandler;
-import com.gentle.support.handler.RestControllerOperationHandler;
-import com.gentle.support.handler.ServiceOperationHandler;
+import com.gentle.support.handler.*;
 
 /**
  * @author gentle
@@ -26,6 +20,11 @@ public class AnnotationContext {
             beanInfomation = new ServiceOperationHandler().handlerBean(clazz);
         }else if (clazz.isAnnotationPresent(RestController.class)){
             beanInfomation = new RestControllerOperationHandler().handlerBean(clazz);
+        }else if (clazz.isAnnotationPresent(RequestMapping.class)){
+                new RequestMappingOperationHandler().handlerBean(clazz);
+        }else {
+
+
         }
 
 
