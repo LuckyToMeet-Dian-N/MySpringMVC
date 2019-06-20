@@ -7,6 +7,7 @@ import com.gentle.util.TypeChoose;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Gentle
@@ -63,7 +64,10 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
     }
 
     private void initIoc(List<BeanInfomation> beanInfomations) {
-        beanInfomations.forEach(e-> getBeanFactory().registerBean(e));
+        System.out.println(beanInfomations);
+        List<BeanInfomation> collect = beanInfomations.stream().filter(e -> !e.getType().equals(TypeChoose.Type.PACKAGE)).collect(Collectors.toList());
+        System.out.println(collect);
+        collect.forEach(e-> getBeanFactory().registerBean(e));
     }
 
 

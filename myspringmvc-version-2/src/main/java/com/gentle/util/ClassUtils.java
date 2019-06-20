@@ -79,12 +79,4 @@ public class ClassUtils {
         return className.substring(lastDotIndex + 1) + CLASS_FILE_SUFFIX;
     }
 
-    public static void main(String[] args) {
-        System.out.println(isSupportDataType(Integer.class));
-
-        System.out.println(getClassFileName(Integer.class));
-        System.out.println(isSupportDataTypeByTypeName(Integer.class.getName()));
-    }
-
-
 }

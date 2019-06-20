@@ -30,7 +30,7 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
         Assert.notNull(packagePath);
         //扫描包下所有文件，并将文件名保存下来
         initScanClassFile();
-
+        //注册 bean 到容器中
         doAnnotationLoader();
         //初始化映射
         initMapping(defaultBeanFactory);

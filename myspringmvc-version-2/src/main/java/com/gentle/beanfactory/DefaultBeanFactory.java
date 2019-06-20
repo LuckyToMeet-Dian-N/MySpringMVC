@@ -143,10 +143,8 @@ public class DefaultBeanFactory extends AbstractBeanFactory {
         String type = beanInfomation.getType();
         try {
             Class<?> classByClassName = ClassUtils.getClassByClassName(beanInfomation.getClazz());
-            if (type.equals(TypeChoose.Type.BEAN)) {
 
                 Object o = classByClassName.newInstance();
-
                 Class<?>[] interfaces = classByClassName.getInterfaces();
                 if (beansClass.containsKey(classByClassName) || beanName.containsKey(classByClassName.getName())) {
                     throw new IllegalArgumentException("bean  已经存在！");
@@ -160,22 +158,16 @@ public class DefaultBeanFactory extends AbstractBeanFactory {
                         beanName.put(e.getName(), o);
                     });
                 }
-            }
-            //判断是否为 mapping 类型
-            if (type.equals(TypeChoose.Type.MAPPING)) {
-                //校验对象中字段是否为空
+                //处理映射
+            if (type.equals(TypeChoose.Type.MAPPING)){
+
                 Assert.notNull(beanInfomation.getMethodName());
                 Assert.notNull(beanInfomation.getUrl());
-
-                Method[] methods = classByClassName.getMethods();
-                AtomicBoolean isExist = new AtomicBoolean(false);
-                Arrays.stream(methods).forEach(e -> {
-                    if (e.getName().equals(beanInfomation.getMethodName())) {
-                        isExist.set(true);
-                        urlMapping.put(beanInfomation.getUrl(), e);
+                for (Method method : classByClassName.getMethods()) {
+                    if (beanInfomation.getMethodName().equals(method.getName())){
+                        urlMapping.put(beanInfomation.getUrl(),method);
                     }
-                });
-                Assert.isTrue(isExist.get());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

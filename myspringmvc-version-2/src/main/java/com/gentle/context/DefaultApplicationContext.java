@@ -2,6 +2,7 @@ package com.gentle.context;
 
 import com.gentle.bean.BeanInfomation;
 import com.gentle.beanfactory.DefaultBeanFactory;
+import com.gentle.test.Test2Controller;
 import com.gentle.test.TestController;
 import com.gentle.util.TypeChoose;
 
@@ -32,15 +33,22 @@ public class DefaultApplicationContext extends AbstractConfigApplicationContext 
         beanInfomation.setClazz("com.gentle.util.ClassUtils");
         beanInfomation.setId("com.gentle.util.ClassUtils");
         BeanInfomation beanInfomation1 = new BeanInfomation();
-        beanInfomation1.setClazz("com.gentle.test.Users");
-        beanInfomation1.setId("com.gentle.test.Users");
-        beanInfomation1.setMethodName("dd");
+
         beanInfomation1.setPackages("com.gentle.test");
         beanInfomation1.setType(TypeChoose.Type.PACKAGE);
+
+        BeanInfomation beanInfomation2 = new BeanInfomation();
+
+        beanInfomation2.setMethodName("aa");
+        beanInfomation2.setType(TypeChoose.Type.MAPPING);
+        beanInfomation2.setUrl("url/logon");
+        beanInfomation2.setId("com.gentle.test.Test2Controller");
+        beanInfomation2.setClazz("com.gentle.test.Test2Controller");
 
         List<BeanInfomation> list = new ArrayList<>();
         list.add(beanInfomation);
         list.add(beanInfomation1);
+        list.add(beanInfomation2);
         refresh(list);
     }
 
@@ -62,7 +70,8 @@ public class DefaultApplicationContext extends AbstractConfigApplicationContext 
         TestController bean = beanFactory.getBean(TestController.class);
         bean.dd();
 
-
+        Test2Controller bean1 = beanFactory.getBean(Test2Controller.class);
+        bean1.aa();
     }
 
 

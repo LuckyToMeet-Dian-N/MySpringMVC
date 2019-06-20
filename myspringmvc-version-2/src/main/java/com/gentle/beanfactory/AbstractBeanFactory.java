@@ -12,9 +12,14 @@ public abstract class AbstractBeanFactory implements  BeanFactory{
      * @param beanInfomation bean 信息
      */
     public abstract void registerBean(BeanInfomation beanInfomation);
-
+    /**
+     * 请求 url 注入容器
+     */
     public abstract void mappingRegister();
 
+    /**
+     * 注入，将@autowire 注解标注的字段注入bean
+     */
     public abstract void autowireRegister();
 
     /**
