@@ -63,6 +63,8 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
 
             initAnnotation(beanInfomations);
 
+
+
         } catch (Exception e) {
 
         }
@@ -90,6 +92,7 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
         //开启载入注解
         annotationLoad.annotationLoader();
     }
+
 
 
 }

@@ -14,26 +14,26 @@ import java.util.Arrays;
 public class BeanOperationHandler implements AnnotationStrategy {
     @Override
     public BeanInfomation handlerBean(Class<?> clazz) {
-        BeanInfomation beanInfomation = new BeanInfomation();
-        if (clazz.isAnnotationPresent(Component.class)){
+        if (clazz.isAnnotationPresent(Component.class)) {
+            BeanInfomation beanInfomation = new BeanInfomation();
             Method[] methods = clazz.getMethods();
             //循环找到 bean 注解标注的方法，构建bean
-            Arrays.stream(methods).forEach(method->{
-                if (method.isAnnotationPresent(Bean.class)){
+            Arrays.stream(methods).forEach(method -> {
+                if (method.isAnnotationPresent(Bean.class)) {
                     Bean annotation = method.getAnnotation(Bean.class);
                     Class<?> returnType = method.getReturnType();
-                    if (!returnType.isInterface()){
+                    if (!returnType.isInterface()) {
                         beanInfomation.setClazz(returnType.getName());
                     }
-                    if ("".equals(annotation.value())){
+                    if ("".equals(annotation.value())) {
                         beanInfomation.setId(returnType.getName());
-                    }else {
+                    } else {
                         beanInfomation.setId(annotation.value());
                     }
                 }
             });
-
+            return beanInfomation;
         }
-        return beanInfomation;
+        return null;
     }
 }

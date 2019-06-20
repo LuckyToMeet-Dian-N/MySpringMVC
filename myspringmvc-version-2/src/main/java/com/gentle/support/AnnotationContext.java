@@ -9,7 +9,11 @@ import com.gentle.support.handler.*;
  */
 public class AnnotationContext {
 
-
+    /**
+     * 根据不同注解判断构建 bean 信息对象
+     * @param clazz
+     * @return
+     */
     public static BeanInfomation executeStrategy(Class clazz) {
         BeanInfomation beanInfomation=null;
         if (clazz.isAnnotationPresent(Component.class)){
@@ -23,11 +27,8 @@ public class AnnotationContext {
         }else if (clazz.isAnnotationPresent(RequestMapping.class)){
                 new RequestMappingOperationHandler().handlerBean(clazz);
         }else {
-
-
+            beanInfomation = new BeanOperationHandler().handlerBean(clazz);
         }
-
-
         return beanInfomation;
     }
 }

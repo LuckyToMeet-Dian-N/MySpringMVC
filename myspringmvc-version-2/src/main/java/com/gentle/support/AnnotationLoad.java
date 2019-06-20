@@ -32,8 +32,13 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
 
         doAnnotationLoader();
 
+        initInjection(defaultBeanFactory);
+
     }
 
+    /**
+     * 构建bean 信息，并注入
+     */
     private void doAnnotationLoader() {
 
         for (String clazz : classNames) {
@@ -48,6 +53,9 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
         }
     }
 
+    /**
+     *
+     */
     private void initScanClassFile() {
         packagePath.forEach(e -> {
             String filthPath = e.replaceAll(".", "/");
