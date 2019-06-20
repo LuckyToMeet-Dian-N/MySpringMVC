@@ -2,19 +2,11 @@ package com.gentle.context;
 
 
 import com.gentle.bean.BeanInfomation;
-import com.gentle.beanfactory.BeanFactory;
-import com.gentle.beanfactory.DefaultBeanFactory;
 import com.gentle.support.AnnotationLoad;
-import com.gentle.util.Assert;
 import com.gentle.util.TypeChoose;
 
-import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Gentle

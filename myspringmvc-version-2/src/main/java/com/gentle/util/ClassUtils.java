@@ -14,54 +14,57 @@ public class ClassUtils {
     /**
      * 存储对象类型的map
      */
-    private static Map<Class,Class<?>> supportParametersMap =new ConcurrentHashMap<>();
+    private static Map<Class, Class<?>> supportParametersMap = new ConcurrentHashMap<>();
     /**
      * 存储对象类型名字的map
      */
-    private static  Map<String,Class<?>> parameterfTypeNameMap = new ConcurrentHashMap<>();
+    private static Map<String, Class<?>> parameterfTypeNameMap = new ConcurrentHashMap<>();
 
     static {
-        supportParametersMap.put(Integer.class,int.class);
-        supportParametersMap.put(Double.class,double.class);
-        supportParametersMap.put(Long.class,long.class);
-        supportParametersMap.put(Byte.class,byte.class);
-        supportParametersMap.put(Short.class,short.class);
-        supportParametersMap.put(BigDecimal.class,BigDecimal.class);
+        supportParametersMap.put(Integer.class, int.class);
+        supportParametersMap.put(Double.class, double.class);
+        supportParametersMap.put(Long.class, long.class);
+        supportParametersMap.put(Byte.class, byte.class);
+        supportParametersMap.put(Short.class, short.class);
+        supportParametersMap.put(BigDecimal.class, BigDecimal.class);
 
-        supportParametersMap.forEach((key,value)->{
-            parameterfTypeNameMap.put(key.getName(),value);
+        supportParametersMap.forEach((key, value) -> {
+            parameterfTypeNameMap.put(key.getName(), value);
         });
     }
 
 
     /**
      * 判断是否为支持的类型
+     *
      * @param typeName 类型的名字
      * @return 是否支持
      */
-    public static boolean isSupportDataTypeByTypeName(String typeName){
+    public static boolean isSupportDataTypeByTypeName(String typeName) {
         Assert.notNull(typeName);
         return parameterfTypeNameMap.containsKey(typeName);
     }
 
     /**
-     *  类对象
+     * 类对象
+     *
      * @param clazzName 包名+类名
      * @return
      */
     public static Class<?> getClassByClassName(String clazzName) throws ClassNotFoundException {
         Assert.notNull(clazzName);
 
-            return Class.forName(clazzName);
+        return Class.forName(clazzName);
 
     }
 
     /**
      * 判断是否为支持的类型
+     *
      * @param clazz class对象
      * @return 是否支持
      */
-    public static boolean isSupportDataType(Class<?> clazz){
+    public static boolean isSupportDataType(Class<?> clazz) {
         Assert.notNull(clazz);
         return supportParametersMap.containsKey(clazz);
     }
@@ -82,11 +85,6 @@ public class ClassUtils {
         System.out.println(getClassFileName(Integer.class));
         System.out.println(isSupportDataTypeByTypeName(Integer.class.getName()));
     }
-
-
-
-
-
 
 
 }

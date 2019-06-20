@@ -13,6 +13,10 @@ public abstract class AbstractBeanFactory implements  BeanFactory{
      */
     public abstract void registerBean(BeanInfomation beanInfomation);
 
+    public abstract void mappingRegister();
+
+    public abstract void autowireRegister();
+
     /**
      * 获取bean 工厂
      * @return

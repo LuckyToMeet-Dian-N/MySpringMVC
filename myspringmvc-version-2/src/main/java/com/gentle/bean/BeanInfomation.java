@@ -78,4 +78,17 @@ public class BeanInfomation {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "BeanInfomation{" +
+                "id='" + id + '\'' +
+                ", clazz='" + clazz + '\'' +
+                ", singlon=" + singlon +
+                ", type='" + type + '\'' +
+                ", methodName='" + methodName + '\'' +
+                ", url='" + url + '\'' +
+                ", packages='" + packages + '\'' +
+                '}';
+    }
 }

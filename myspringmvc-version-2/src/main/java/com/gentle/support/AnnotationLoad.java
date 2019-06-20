@@ -5,6 +5,7 @@ import com.gentle.beanfactory.DefaultBeanFactory;
 import com.gentle.util.Assert;
 import com.gentle.util.ClassUtils;
 
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -31,10 +32,14 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
         initScanClassFile();
 
         doAnnotationLoader();
-
+        //初始化映射
+        initMapping(defaultBeanFactory);
+        //初始化 autowire 注入
         initInjection(defaultBeanFactory);
 
     }
+
+
 
     /**
      * 构建bean 信息，并注入
@@ -45,7 +50,9 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
             try {
                 Class<?> classByClassName = ClassUtils.getClassByClassName(clazz);
                 BeanInfomation beanInfomation = AnnotationContext.executeStrategy(classByClassName);
-                Assert.notNull(beanInfomation);
+                if (beanInfomation==null){
+                    continue;
+                }
                 defaultBeanFactory.registerBean(beanInfomation);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -54,12 +61,12 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
     }
 
     /**
-     *
+     * 初始化时扫描文件
      */
     private void initScanClassFile() {
         packagePath.forEach(e -> {
-            String filthPath = e.replaceAll(".", "/");
-            packageScan(e, filthPath);
+            URL filePath = this.getClass().getClassLoader().getResource(e.replace(".", "/"));
+            packageScan(e, filePath.getPath());
         });
     }
 

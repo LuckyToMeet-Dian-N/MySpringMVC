@@ -2,9 +2,9 @@ package com.gentle.support;
 
 import com.gentle.annotation.*;
 import com.gentle.beanfactory.BeanFactory;
+import com.gentle.beanfactory.DefaultBeanFactory;
 import com.gentle.util.Assert;
 import com.gentle.util.ClassUtils;
-import com.gentle.web.Users;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -43,6 +43,7 @@ public abstract   class AbstractAnnotationSupport implements AnnotationSupport {
      * @param filePath    文件路径  转换后的路径 com/gentle
      */
     protected void packageScan(String packagePath, String filePath) {
+
         File file = new File(filePath.trim());
         File[] files = file.listFiles();
         if (files == null) {
@@ -59,42 +60,17 @@ public abstract   class AbstractAnnotationSupport implements AnnotationSupport {
         });
     }
 
+    protected void initMapping(DefaultBeanFactory defaultBeanFactory) {
+        defaultBeanFactory.mappingRegister();
+    }
+
     /**
      * 初始化注入 autowire
-     * @param defaultBeanFactory
+     * @param defaultBeanFactory bean 工厂
      */
-    protected void initInjection(BeanFactory defaultBeanFactory){
+    protected void initInjection(DefaultBeanFactory defaultBeanFactory){
 
-        for (String clazz : classNames) {
-            try {
-                Class<?> classByClassName = ClassUtils.getClassByClassName(clazz);
-                Assert.notNull(classByClassName);
-
-                boolean contains = annontationList.contains(classByClassName);
-                Assert.isTrue(contains);
-
-                Field[] fields = classByClassName.getDeclaredFields();
-                Object bean1 = defaultBeanFactory.getBean(classByClassName);
-                Arrays.stream(fields).forEach(field -> {
-                    if (field.isAnnotationPresent(Autowire.class)){
-                        Autowire annotation = field.getAnnotation(Autowire.class);
-                        String value = annotation.value();
-                        if ("".equals(value)) {
-                                Class<?> aClass = field.getType();
-                                Object bean = defaultBeanFactory.getBean(aClass);
-                                setField(bean1, field, bean);
-                        } else {
-                            //不为空直接时根据输入的值返回
-                            String name = annotation.value();
-                            Object bean = defaultBeanFactory.getBean(name);
-                            setField(bean1, field, bean);
-                        }
-                    }
-                });
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        defaultBeanFactory.autowireRegister();
 
     }
     /**

@@ -1,4 +1,4 @@
-package com.gentle.web;
+package com.gentle.test;
 
 /**
  * @author Gentle
