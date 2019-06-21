@@ -51,7 +51,6 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
     @Override
     public void refresh(List<BeanInfomation> beanInfomations) {
         try {
-
             initIoc(beanInfomations);
 
             initAnnotation(beanInfomations);
@@ -64,7 +63,7 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
     }
 
     private void initIoc(List<BeanInfomation> beanInfomations) {
-        System.out.println(beanInfomations);
+
         List<BeanInfomation> collect = beanInfomations.stream().filter(e -> !e.getType().equals(TypeChoose.Type.PACKAGE)).collect(Collectors.toList());
         System.out.println(collect);
         collect.forEach(e-> getBeanFactory().registerBean(e));

@@ -48,8 +48,7 @@ public class MethodHandler {
             String parameter = request.getParameter(s);
             Class<?> aClass = methodArgumentNameAndType.get(parameter);
             if (aClass == null) {
-                i++;
-                continue;
+                throw new IllegalArgumentException("方法不存在参数名["+ parameter +"],请检查后重试");
             }
             //是否为基本类型
             objects[i] = new DefaultConversionService().convert(parameter, aClass);

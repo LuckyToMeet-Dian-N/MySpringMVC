@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="com.gentle.util.ClassUtils" clazz="com.gentle.util.ClassUtils" type="packages" packages="com.gentle.test"/>
+</beans>

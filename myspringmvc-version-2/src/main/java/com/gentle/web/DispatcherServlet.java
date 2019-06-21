@@ -36,7 +36,6 @@ public  class DispatcherServlet  extends HttpServlet {
 
         doDispatcher(req,resp);
 
-        super.doPost(req, resp);
     }
 
     /**

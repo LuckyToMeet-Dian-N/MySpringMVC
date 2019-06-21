@@ -4,11 +4,9 @@ import com.gentle.bean.BeanInfomation;
 import com.gentle.beanfactory.DefaultBeanFactory;
 import com.gentle.test.Test2Controller;
 import com.gentle.test.TestController;
-import com.gentle.util.TypeChoose;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * @author Gentle
@@ -25,31 +23,9 @@ public class DefaultApplicationContext extends AbstractConfigApplicationContext 
 
     @Override
     public void loader(String location) {
-//        DefaultXmlBeanReader reader = new DefaultXmlBeanReader();
-//        reader.loader(location);
-//        refresh(reader.getBeanInfomations());
-
-        BeanInfomation beanInfomation = new BeanInfomation();
-        beanInfomation.setClazz("com.gentle.util.ClassUtils");
-        beanInfomation.setId("com.gentle.util.ClassUtils");
-        BeanInfomation beanInfomation1 = new BeanInfomation();
-
-        beanInfomation1.setPackages("com.gentle.test");
-        beanInfomation1.setType(TypeChoose.Type.PACKAGE);
-
-        BeanInfomation beanInfomation2 = new BeanInfomation();
-
-        beanInfomation2.setMethodName("aa");
-        beanInfomation2.setType(TypeChoose.Type.MAPPING);
-        beanInfomation2.setUrl("url/logon");
-        beanInfomation2.setId("com.gentle.test.Test2Controller");
-        beanInfomation2.setClazz("com.gentle.test.Test2Controller");
-
-        List<BeanInfomation> list = new ArrayList<>();
-        list.add(beanInfomation);
-        list.add(beanInfomation1);
-        list.add(beanInfomation2);
-        refresh(list);
+        DefaultXmlBeanReader reader = new DefaultXmlBeanReader();
+        reader.loader(location);
+        refresh(reader.getBeanInfomations());
     }
 
     @Override
