@@ -1,4 +1,4 @@
-package com.gentle.conver;
+package com.gentle.conversion;
 
 /**
  * @author Gentle

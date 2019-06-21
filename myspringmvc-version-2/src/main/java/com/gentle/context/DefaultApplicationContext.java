@@ -2,6 +2,7 @@ package com.gentle.context;
 
 import com.gentle.bean.BeanInfomation;
 import com.gentle.beanfactory.DefaultBeanFactory;
+import com.gentle.resources.DefaultXmlBeanReader;
 import com.gentle.test.Test2Controller;
 import com.gentle.test.TestController;
 

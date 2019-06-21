@@ -1,7 +1,5 @@
-package com.gentle.conver;
+package com.gentle.conversion;
 
-import com.gentle.test.TestService;
-import com.gentle.test.TestServiceImpl;
 import com.gentle.util.Assert;
 
 import java.math.BigInteger;

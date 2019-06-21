@@ -1,19 +1,15 @@
-package com.gentle.context;
+package com.gentle.resources;
 
 import com.gentle.bean.BeanInfomation;
-import com.gentle.beanfactory.DefaultBeanFactory;
-import com.gentle.resources.Loader;
 import com.gentle.util.Assert;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
