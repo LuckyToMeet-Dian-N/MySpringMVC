@@ -19,7 +19,7 @@ public class TestController {
     public String dd(String name,Integer age){
         System.out.println("名字："+name +"   "+"年龄："+age);
         System.out.println(testService);
-        return "abcdddd";
+        return "这是注解方式注入容器的";
     }
 
 

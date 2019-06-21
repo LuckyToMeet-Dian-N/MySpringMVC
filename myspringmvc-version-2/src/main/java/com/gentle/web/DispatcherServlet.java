@@ -57,13 +57,13 @@ public class DispatcherServlet extends HttpServlet {
         //将请求来的第一个 /  去掉
         url = url.substring(url.indexOf("/") + 1);
 
+        response.setContentType("text/html;charset=UTF-8");
+
         Method method = beanFactory.getMapping(url);
-        PrintWriter writer = response.getWriter();
-        try {
-
-
+        try (PrintWriter writer = response.getWriter()) {
+            //容器中没有路径就返回 404
             if (method == null) {
-                writer.write("404 not the fond");
+                writer.write("页面丢了！！");
                 return;
             }
             MethodHandler methodHandler = new MethodHandler(beanFactory, method);
@@ -75,12 +75,14 @@ public class DispatcherServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            writer.close();
         }
 
     }
 
+    /**
+     * web 容器启动时，初始化时加载配置。读取 xml 注入工厂
+     * @param servletConfig
+     */
     @Override
     public void init(ServletConfig servletConfig) {
 

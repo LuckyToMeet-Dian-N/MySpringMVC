@@ -51,22 +51,24 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
     @Override
     public void refresh(List<BeanInfomation> beanInfomations) {
         try {
-
+            //ioc 容器初始化
             initIoc(beanInfomations);
-
+            //注解初始化
             initAnnotation(beanInfomations);
 
-
-
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
+    /**
+     * bean 信息
+     * @param beanInfomations bean 信息
+     */
     private void initIoc(List<BeanInfomation> beanInfomations) {
-
+        //排除 BeanInfomation 中的包类型
         List<BeanInfomation> collect = beanInfomations.stream().filter(e -> !e.getType().equals(TypeChoose.Type.PACKAGE)).collect(Collectors.toList());
-
+        //注册到容器中
         collect.forEach(e-> getBeanFactory().registerBean(e));
     }
 

@@ -11,8 +11,9 @@ public class Test2Controller {
     @Autowire
     private TestService testService;
 
-    public void aa(){
-        System.out.println(testService);
+    public String aa(){
+
+        return "这是 xml 方式注入容器的！";
     }
 
 }
