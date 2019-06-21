@@ -44,6 +44,8 @@ public class DefaultConversionService extends AbstractConfigConversionService {
           return   (T) (isHexNumber(source) ? Long.decode(source) : Long.valueOf(source));
         }else if (targetType == BigInteger.class){
           return   (T) (isHexNumber(source) ? decodeBigInteger(source) : new BigInteger(source));
+        }else if ((targetType == String .class)){
+            return (T)String.valueOf(source);
         }
         throw new IllegalArgumentException("数据类型类型不支持");
 

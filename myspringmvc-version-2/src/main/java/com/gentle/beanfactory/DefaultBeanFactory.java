@@ -64,70 +64,73 @@ public class DefaultBeanFactory extends AbstractBeanFactory {
     }
 
     private void doMappingRegister() {
+        synchronized (this) {
+            try {
+                for (Map.Entry<Class<?>, Object> entry : beansClass.entrySet()) {
+                    Class<?> clazz = entry.getValue().getClass();
+                    //找到所有方法
+                    Method[] methods = clazz.getMethods();
+                    for (Method method : methods) {
+                        StringBuilder url = new StringBuilder();
 
-        try {
-            for (Map.Entry<Class<?>, Object> entry : beansClass.entrySet()) {
-                Class<?> clazz = entry.getValue().getClass();
-                //找到所有方法
-                Method[] methods = clazz.getMethods();
-                for (Method method : methods) {
-                    StringBuilder url = new StringBuilder();
-
-                    if (clazz.isAnnotationPresent(RequestMapping.class)) {
-                        RequestMapping annotation = clazz.getAnnotation(RequestMapping.class);
-                        url.append(annotation.value());
-                    }
-                    if (method.isAnnotationPresent(RequestMapping.class)) {
-                        RequestMapping annotation1 = method.getAnnotation(RequestMapping.class);
-                        url.append("/").append(annotation1.value());
-                        Assert.isTrue(!urlMapping.containsKey(url.toString()));
-                        urlMapping.put(url.toString(),method);
+                        if (clazz.isAnnotationPresent(RequestMapping.class)) {
+                            RequestMapping annotation = clazz.getAnnotation(RequestMapping.class);
+                            url.append(annotation.value());
+                        }
+                        if (method.isAnnotationPresent(RequestMapping.class)) {
+                            RequestMapping annotation1 = method.getAnnotation(RequestMapping.class);
+                            url.append("/").append(annotation1.value());
+                            Assert.isTrue(!urlMapping.containsKey(url.toString()));
+                            urlMapping.put(url.toString(), method);
+                        }
                     }
                 }
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
         }
-
-
     }
 
     @Override
     public void autowireRegister() {
-        try {
-            for (Map.Entry<Class<?>, Object> entry : beansClass.entrySet()) {
-                Class<?> aClass = entry.getValue().getClass();
-                Field[] declaredFields = aClass.getDeclaredFields();
-                for (Field field :declaredFields){
-                    field.setAccessible(true);
-                    if (field.isAnnotationPresent(Autowire.class)){
-                        Autowire annotation = field.getAnnotation(Autowire.class);
-                        String value = annotation.value();
-                        if ("".equals(value)) {
-                            Class<?> aClass1 = field.getType();
-                            Object bean = getBean(aClass1);
-                            setField(entry.getValue(), field, bean);
-                        } else {
-                            //不为空直接时根据输入的值返回
-                            String name = annotation.value();
-                            Object bean = getBean(name);
-                            setField(entry.getValue(), field, bean);
+        synchronized (this) {
+            try {
+                for (Map.Entry<Class<?>, Object> entry : beansClass.entrySet()) {
+                    Class<?> aClass = entry.getValue().getClass();
+                    Field[] declaredFields = aClass.getDeclaredFields();
+                    for (Field field : declaredFields) {
+                        field.setAccessible(true);
+                        if (field.isAnnotationPresent(Autowire.class)) {
+                            Autowire annotation = field.getAnnotation(Autowire.class);
+                            String value = annotation.value();
+                            if ("".equals(value)) {
+                                Class<?> aClass1 = field.getType();
+                                Object bean = getBean(aClass1);
+                                setField(entry.getValue(), field, bean);
+                            } else {
+                                //不为空直接时根据输入的值返回
+                                String name = annotation.value();
+                                Object bean = getBean(name);
+                                setField(entry.getValue(), field, bean);
+                            }
                         }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-    private void setField(Object bean1, Field field, Object bean)  {
+
+    private void setField(Object bean1, Field field, Object bean) {
         try {
             field.set(bean1, bean);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public DefaultBeanFactory getBeanFactory() {
 
@@ -140,9 +143,10 @@ public class DefaultBeanFactory extends AbstractBeanFactory {
      * @param beanInfomation bean信息对象
      */
     private void doRegisterBean(BeanInfomation beanInfomation) {
-        String type = beanInfomation.getType();
-        try {
-            Class<?> classByClassName = ClassUtils.getClassByClassName(beanInfomation.getClazz());
+        synchronized (this) {
+            String type = beanInfomation.getType();
+            try {
+                Class<?> classByClassName = ClassUtils.getClassByClassName(beanInfomation.getClazz());
 
                 Object o = classByClassName.newInstance();
                 Class<?>[] interfaces = classByClassName.getInterfaces();
@@ -159,18 +163,18 @@ public class DefaultBeanFactory extends AbstractBeanFactory {
                     });
                 }
                 //处理映射
-            if (type.equals(TypeChoose.Type.MAPPING)){
-
-                Assert.notNull(beanInfomation.getMethodName());
-                Assert.notNull(beanInfomation.getUrl());
-                for (Method method : classByClassName.getMethods()) {
-                    if (beanInfomation.getMethodName().equals(method.getName())){
-                        urlMapping.put(beanInfomation.getUrl(),method);
+                if (type.equals(TypeChoose.Type.MAPPING)) {
+                    Assert.notNull(beanInfomation.getMethodName(),beanInfomation.getMethodName()+"不能为空呀");
+                    Assert.notNull(beanInfomation.getUrl());
+                    for (Method method : classByClassName.getMethods()) {
+                        if (beanInfomation.getMethodName().equals(method.getName())) {
+                            urlMapping.put(beanInfomation.getUrl(), method);
+                        }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

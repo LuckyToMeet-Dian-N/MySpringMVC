@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-    <bean id="com.gentle.util.ClassUtils" clazz="com.gentle.util.ClassUtils" type="packages" packages="com.gentle.test"/>
+    <bean id="com.gentle.util.ClassUtils" clazz="com.gentle.util.ClassUtils" type="package" packages="com.gentle.test"/>
+    <bean id="com.gentle.test.Test2Controller" clazz="com.gentle.test.Test2Controller" type="mapping" methodName="aa" url="/aaa/aaa"/>
 </beans>

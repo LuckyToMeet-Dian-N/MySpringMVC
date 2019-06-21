@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,9 +33,20 @@ public class LocalMethodParameterNameDiscoverer implements ParameterNameDiscover
         } else if (memberMap.get(method) == null) {
             inspectClass(method, declaringClass, memberMap);
         } else {
-            return (String[]) memberMap.get(method).toArray();
+            return objectToString( memberMap.get(method).toArray());
         }
-        return null;
+        return objectToString( methodParameterNameCache.get(declaringClass).get(method).toArray());
+    }
+
+    private String[] objectToString(Object[] objects){
+
+        String[] strings = new String[objects.length];
+       for (int i =0;i<objects.length;i++){
+           strings[i]= String.valueOf(objects[i]);
+       }
+       return strings;
+
+
     }
 
     /**
@@ -91,8 +103,12 @@ public class LocalMethodParameterNameDiscoverer implements ParameterNameDiscover
                     public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
                         //拿去实例方法中的方法参数名，静态方法忽略
                         if (index > 0) {
-                            Object o = !memberMap.containsKey(method) ? memberMap.put(method, new ArrayList<>())
-                                    : memberMap.get(method).add(name);
+
+                            if (!memberMap.containsKey(method)){
+                                memberMap.put(method,new ArrayList<>());
+                            }
+                            memberMap.get(method).add(name);
+
                         }
                     }
                 };

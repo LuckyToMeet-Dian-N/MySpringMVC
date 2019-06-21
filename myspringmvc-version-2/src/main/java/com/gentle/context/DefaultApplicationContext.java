@@ -44,7 +44,6 @@ public class DefaultApplicationContext extends AbstractConfigApplicationContext 
         defaultApplicationContext.loader("");
         DefaultBeanFactory beanFactory = defaultApplicationContext.getBeanFactory();
         TestController bean = beanFactory.getBean(TestController.class);
-        bean.dd();
 
         Test2Controller bean1 = beanFactory.getBean(Test2Controller.class);
         bean1.aa();

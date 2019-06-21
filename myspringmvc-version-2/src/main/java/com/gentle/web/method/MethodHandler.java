@@ -29,13 +29,21 @@ public class MethodHandler {
 
     /**
      * 参数绑定
+     *
      * @param request
      */
-    public void invokeForRequest(HttpServletRequest request) {
+    public Object invokeForRequest(HttpServletRequest request) {
+        Class<?> declaringClass = method.getDeclaringClass();
+        Object bean = beanFactory.getBean(declaringClass);
 
         Map<String, Class<?>> methodArgumentNameAndType = getMethodArgumentNameAndType();
         if (methodArgumentNameAndType == null || methodArgumentNameAndType.isEmpty()) {
-            return;
+            try {
+                Object invoke = method.invoke(bean);
+                return invoke;
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
         }
         Object[] objects = new Object[methodArgumentNameAndType.size()];
         Enumeration<String> parameterNames = request.getParameterNames();
@@ -46,25 +54,27 @@ public class MethodHandler {
         while (parameterNames.hasMoreElements()) {
             String s = parameterNames.nextElement();
             String parameter = request.getParameter(s);
-            Class<?> aClass = methodArgumentNameAndType.get(parameter);
+            Class<?> aClass = methodArgumentNameAndType.get(s);
             if (aClass == null) {
-                throw new IllegalArgumentException("方法不存在参数名["+ parameter +"],请检查后重试");
+                throw new IllegalArgumentException("方法不存在参数名[" + s + "],请检查后重试");
             }
             //是否为基本类型
             objects[i] = new DefaultConversionService().convert(parameter, aClass);
             i++;
         }
-        Class<?> declaringClass = method.getDeclaringClass();
-        Object bean = beanFactory.getBean(declaringClass);
+
         try {
-            method.invoke(bean, objects);
+            Object invoke = method.invoke(bean, objects);
+            return invoke;
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
-     *  获取方法参数类型和参数名
+     * 获取方法参数类型和参数名
+     *
      * @return
      */
     private Map<String, Class<?>> getMethodArgumentNameAndType() {
@@ -73,6 +83,10 @@ public class MethodHandler {
             return null;
         }
         String[] parameterNames = parameterNameDiscoverer.getParameterNames(method);
+
+        if (parameterNames==null){
+            return null;
+        }
         Map<String, Class<?>> map = new HashMap<>(parameterNames.length);
         for (int i = 0; i < parameterTypes.length; i++) {
             map.put(parameterNames[i], parameterTypes[i]);

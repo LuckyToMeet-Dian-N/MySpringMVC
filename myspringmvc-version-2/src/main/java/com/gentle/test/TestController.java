@@ -16,9 +16,10 @@ public class TestController {
     TestService testService;
 
     @RequestMapping(value = "bb")
-    public void dd(){
-
+    public String dd(String name,Integer age){
+        System.out.println("名字："+name +"   "+"年龄："+age);
         System.out.println(testService);
+        return "abcdddd";
     }
 
 

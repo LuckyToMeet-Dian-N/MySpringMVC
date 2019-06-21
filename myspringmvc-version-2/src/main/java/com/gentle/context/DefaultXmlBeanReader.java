@@ -78,7 +78,7 @@ public class DefaultXmlBeanReader implements Loader {
                 if (element.attributeValue("type") != null) {
                     beanInfomation.setType(element.attributeValue("type"));
                 }
-                beanInfomation.setMethodName(element.attributeValue("methodNme"));
+                beanInfomation.setMethodName(element.attributeValue("methodName"));
 
                 beanInfomation.setUrl(element.attributeValue("url"));
 
