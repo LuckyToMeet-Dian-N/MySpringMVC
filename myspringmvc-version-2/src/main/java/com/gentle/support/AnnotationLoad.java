@@ -23,7 +23,9 @@ public class AnnotationLoad extends AbstractAnnotationSupport {
         this.packagePath = packagePath;
     }
 
-
+    /**
+     * 注解初始化
+     */
     @Override
     public void annotationLoader() {
 

@@ -78,7 +78,7 @@ public abstract class AbstractApplicationContext implements ConfigApplicationCon
      * @param beanInfomations bean 信息
      */
     private void initAnnotation(List<BeanInfomation> beanInfomations) {
-
+        //找到所有类型是包类型的，用于扫描注解，进行注入
         List<String> list = new ArrayList<>();
         beanInfomations.forEach(e->{
             if (e.getType().equals(TypeChoose.Type.PACKAGE)) {

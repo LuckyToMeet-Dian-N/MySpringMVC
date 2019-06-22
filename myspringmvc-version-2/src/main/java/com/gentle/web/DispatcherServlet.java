@@ -66,7 +66,9 @@ public class DispatcherServlet extends HttpServlet {
                 writer.write("页面丢了！！");
                 return;
             }
+            //方法处理
             MethodHandler methodHandler = new MethodHandler(beanFactory, method);
+            //参数绑定
             Object o = methodHandler.invokeForRequest(request);
             if (o == null) {
                 writer.write("没有返回值");
@@ -85,13 +87,13 @@ public class DispatcherServlet extends HttpServlet {
      */
     @Override
     public void init(ServletConfig servletConfig) {
-
+        //获取 web.xml 中的文件
         String contextConfigLocation = servletConfig.getInitParameter("contextConfigLocation");
-
+        //默认上下文构建
         DefaultApplicationContext applicationContext = new DefaultApplicationContext();
-
+        //解析 xml 文件，并注入到 ioc 容器
         applicationContext.loader(contextConfigLocation);
-
+        //注入 bean 工厂
         this.beanFactory = applicationContext.getBeanFactory();
 
     }

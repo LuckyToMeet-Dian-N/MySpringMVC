@@ -18,14 +18,17 @@ public class DefaultApplicationContext extends AbstractConfigApplicationContext 
     @Override
     public void registerBean(BeanInfomation beanInfomation) {
         DefaultBeanFactory beanFactory = getBeanFactory();
+        //注册bean
         beanFactory.registerBean(beanInfomation);
 
     }
 
     @Override
     public void loader(String location) {
+        //解析 xml
         DefaultXmlBeanReader reader = new DefaultXmlBeanReader();
         reader.loader(location);
+        //核心方法，注入 bean
         refresh(reader.getBeanInfomations());
     }
 
